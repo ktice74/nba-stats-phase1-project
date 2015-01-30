@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ActiveRecord Todos Part 1 
  
 ##Learning Competencies 
@@ -132,3 +133,7 @@ As you work through the iterations, pay close attention to how *change* impacts 
 
 
 ##Resources
+=======
+# nba-stats-phase1-project
+Cool project for phase 1
+>>>>>>> c0865739cd9bec781c68bff72879ef16614fc069
