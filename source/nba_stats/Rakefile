@@ -3,6 +3,10 @@ require 'rspec/core/rake_task'
 
 require_relative 'config/application'
 
+task "restart" => ["db:drop", "db:create", "db:migrate", "db:seed"] do
+    puts "You have #{Team.all.count} teams and #{Player.all.count} players"
+end
+
 desc "create the database"
 task "db:create" do
   puts "Creating file #{DB_PATH} if it doesn't exist..."
@@ -27,6 +31,7 @@ end
 desc "populate the test database with sample data"
 task "db:seed" do
   require APP_ROOT.join('db', 'seeds.rb')
+  Parser.new.get_data_from_web
 end
 
 desc 'Retrieves the current schema version number'
