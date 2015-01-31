@@ -3,7 +3,7 @@
 
 class View
 README = <<eos
-############# NBA STATS - Available Commands ###########################################
+############### NBA STATS - Available Commands ###########################################
                    options: <top:10> <team:yourteam> <player:bestplayer>
      team_selfishness_rate: Who are the most selfish players in your team?
    league_selfishness_rate: Who are the most selfish players in the league?
@@ -59,16 +59,26 @@ eos
   end
 
   def print(players,attributes)
-    if @team
-      puts "#{@team.capitalized_team_name} --------------------------------------------------------------------"
+    puts
+    # if @team
+    #   puts "#{@team.capitalized_team_name}: "
+    # end
+    line = "Position".center(10) + "|"
+    line += "name".center(28) + "|"
+    attributes.each do |attr|
+      line += attr.center(28) + "|"
     end
-    players.each do |player|
-      line = "Player: #{player.name} |"
+    puts line
+    puts "-" * 200
+    players.each.with_index do |player, index|
+      line = (index+1).to_s.center(10) + "|"
+      line += player.name.center(28) + "|"
       attributes.each do |attr|
-        line += " #{attr}: #{player.send(attr)} |"
+        line += player.send(attr).to_s.center(28) + "|"
       end
       puts line
     end
+    puts
   end
 
   def method_name
@@ -77,3 +87,15 @@ eos
 
 end
 
+  # def print(players,attributes)
+  #   if @team
+  #     puts "#{@team.capitalized_team_name} --------------------------------------------------------------------"
+  #   end
+  #   players.each do |player|
+  #     line = "Player: #{player.name} |"
+  #     attributes.each do |attr|
+  #       line += " #{attr}: #{player.send(attr)} |"
+  #     end
+  #     puts line
+  #   end
+  # end
