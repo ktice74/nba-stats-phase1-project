@@ -3,7 +3,7 @@ class Controller
 
   def initialize
     @view = View.new
-    @commands = ["team_selfishness", "league_selfishness", "point_leaders", "rebound_leaders", "assist_leaders", "team_leaders", "team_stars", "team_weighted_efficiency", "league_weighted_efficiency", "player_weighted_efficiency"]
+    @commands = ["team_selfishness", "league_selfishness", "point_leaders", "rebound_leaders", "assist_leaders", "team_leaders", "team_stars", "team_weighted_efficiency", "league_weighted_efficiency", "player_weighted_efficiency", "players"]
   end
 
   def launch
@@ -17,14 +17,14 @@ class Controller
   def team_selfishness
     selfish_array = @view.team.players.sort_by {|player| player.selfishness_rate}
     selected_selfish_array = selfish_array[-(@view.top)..-1]
-    attributes = ["selfishness_rate", "position"]
+    attributes = ["selfishness_rate", "position", "points", "rebounds"]
     @view.print(selected_selfish_array.reverse, attributes)
   end
 
   def league_selfishness
-    selfish_array = Player.all.sort_by {|player| player.selfishness_rate}
+    selfish_array = Player.all.sort_by {|player| player.selfishness_rate}.select { |player| player.position != "Center" }
     selected_selfish_array = selfish_array[-(@view.top)..-1]
-    attributes = ["selfishness_rate", "position", "in_team"]
+    attributes = ["selfishness_rate", "position", "in_team", "points", "rebounds"]
     @view.print(selected_selfish_array.reverse, attributes)
   end
 
@@ -56,11 +56,14 @@ class Controller
   end
 
   def team_leaders
-    puts "Point Leaders -----------------------------------"
+    puts
+    puts "Point Leaders"
     point_leaders
-    puts "Rebound Leaders -----------------------------------"
+    puts
+    puts "Rebound Leaders"
     rebound_leaders
-    puts "Assist Leaders -----------------------------------"
+    puts
+    puts "Assist Leaders"
     assist_leaders
   end
 
@@ -113,6 +116,11 @@ class Controller
   def player_weighted_efficiency
     attributes = ["weighted_efficiency", "points", "assists", "rebounds"]
     @view.print([@view.player], attributes)
+  end
+
+  def players
+    attributes = ["gp", "points", "rebounds", "assists"]
+    @view.print(@view.team.players, attributes)
   end
 
 end

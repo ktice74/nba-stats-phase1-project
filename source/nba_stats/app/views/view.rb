@@ -4,14 +4,17 @@
 class View
 README = <<eos
 ############# NBA STATS - Available Commands ###########################################
-                 options: <top:10> <team:yourteam> <player:bestplayer>
-   team_selfishness_rate: Who are the most selfish players in your team?
- league_selfishness_rate: Who are the most selfish players in the league?
-           point_leaders: See the point leaders in your team
-         rebound_leaders: See the rebound leaders in your team
-          assist_leaders: See the assist leaders in your team
-            team_leaders: All the team leaders, at once!
-              team_stars: See the Team Stars! Team stars are the players who appear in all team leaders categories
+                   options: <top:10> <team:yourteam> <player:bestplayer>
+     team_selfishness_rate: Who are the most selfish players in your team?
+   league_selfishness_rate: Who are the most selfish players in the league?
+             point_leaders: See the point leaders in your team
+           rebound_leaders: See the rebound leaders in your team
+            assist_leaders: See the assist leaders in your team
+              team_leaders: All the team leaders, at once!
+                team_stars: See the Team Stars! Team stars are the players who appear in all team leaders categories
+player_weighted_efficiency: Weighted efficiency for a player
+  team_weighted_efficiency: Weighted efficiency for you team
+league_weighted_efficiency: Weighted efficiency for all league!
 eos
 
   attr_reader :command, :team, :top, :player
@@ -52,7 +55,7 @@ eos
 
   def get_top
     top_input = @arguments.find { |arg| arg.include?('top') }
-    top_input ? @top = (top_input.sub('top:', '').to_i) : @top = 10
+    top_input ? @top = (top_input.sub('top:', '').to_i) : @top = 5
   end
 
   def print(players,attributes)
