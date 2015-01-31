@@ -2,6 +2,7 @@ require 'pathname'
 require 'sqlite3'
 require 'active_record'
 require 'logger'
+#require 'colorize'
 
 APP_ROOT = Pathname.new(File.expand_path(File.join(File.dirname(__FILE__), '..')))
 
@@ -26,4 +27,5 @@ end
 ActiveRecord::Base.establish_connection :adapter  => 'sqlite3',
                                         :database => DB_PATH
 
-# require APP_ROOT.join('db', 'seeds.rb')
+require APP_ROOT.join('app', 'views', 'view.rb')
+require APP_ROOT.join('app', 'controllers', 'controller.rb')

@@ -3,6 +3,11 @@ require 'rspec/core/rake_task'
 
 require_relative 'config/application'
 
+# task "testing" do
+#   view = View.new
+#   view.test
+# end
+
 task "restart" => ["db:drop", "db:create", "db:migrate", "db:seed"] do
     puts "You have #{Team.all.count} teams and #{Player.all.count} players"
 end
